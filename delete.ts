@@ -30,7 +30,10 @@ if (allServers.error) {
 if (allServers.data.servers.length > 0) {
   echo(chalk.red(`🌲 Number of existing Servers: ${JSON.stringify(allServers.data.servers)}`))
   const serverId = allServers.data.servers[0].id
-  const deleteServer = await client.DELETE(`/servers/${serverId}`)
+
+  const deleteServer = await client.DELETE(`/servers/{id}`, {
+    params: { path: { id: serverId, } },
+  })
 
   if (deleteServer.error) {
     echo(chalk.red('Error deleting server: ' + JSON.stringify(deleteServer['error'])));
@@ -51,20 +54,9 @@ if (allVolumes.data.volumes.length > 0) {
   echo(chalk.red(`🌲 Number of existing volumes: ${JSON.stringify(allVolumes.data.volumes)}`))
   const volumeId = allVolumes.data.volumes[0].id
 
-  const updateVolume = await client.PUT(`/volumes/${volumeId}`, {
-    body: {
-      server: null,
-    }
+  const deleteVolume = await client.DELETE(`/volumes/{id}`, {
+    params: { path: { id: volumeId, } },
   })
-
-  if (updateVolume.error) {
-    echo(chalk.red('Error updating volume: ' + JSON.stringify(updateVolume['error'])));
-    Deno.exit(1);
-  }
-
-  echo(chalk.white(`🌲 Volume updated: ${volumeId}`))
-
-  const deleteVolume = await client.DELETE(`/volumes/${volumeId}`)
 
   if (deleteVolume.error) {
     echo(chalk.red('Error deleting volume: ' + JSON.stringify(deleteVolume['error'])));
