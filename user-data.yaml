@@ -1,0 +1,29 @@
+#cloud-config
+fqdn: jacq.cc
+hostname: jacq.cc
+locale: en_AU.UTF-8
+timezone: Australia/Brisbane
+
+users:
+  - name: rj
+    lock_passwd: true
+    groups: sudo, users, admin, docker
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPh+R5aHphuQlIQ6Eh8STTH9gqD9mS5lLWhWpZnsZkKh r@jacq.cc"
+
+packages:
+  - ufw
+  - sshguard
+package_update: true
+package_upgrade: true
+
+runcmd:
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw limit ssh
+  - ufw allow http
+  - ufw allow https
+  - ufw enable
+  - reboot
