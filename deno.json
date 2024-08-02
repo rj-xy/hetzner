@@ -1,5 +1,6 @@
 {
   "tasks": {
+    "cache": "deno cache create.ts delete.ts",
     "create": "deno run --env -A ./create.ts",
     "delete": "deno run --env -A ./delete.ts",
     "check-user-data": "cloud-init schema -c user-data.yaml --annotate",
