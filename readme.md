@@ -10,3 +10,7 @@ deno task create
 # Delete an existing volume and server
 deno task delete
 ```
+
+```
+docker compose up
+```

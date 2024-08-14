@@ -14,6 +14,12 @@ users:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPh+R5aHphuQlIQ6Eh8STTH9gqD9mS5lLWhWpZnsZkKh r@jacq.cc"
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKhR9/6S+oIFLOxFWsMm4iIpKUBa8vcJ62CS4SwHJVAt r@jacq.cc"
 
+files:
+  - path: /home/rj/.bash_aliases
+    source: .bash_aliases
+  - path: /home/rj/compose.yaml
+    source: compose.yaml
+    
 packages:
   - curl
   - ufw
@@ -22,6 +28,10 @@ package_update: true
 package_upgrade: true
 
 runcmd:
+  - sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+  - sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+  - sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
+
   # ufw
   - ufw default deny incoming
   - ufw default allow outgoing
@@ -51,5 +61,6 @@ runcmd:
   - usermod -aG docker rj
   - systemctl enable docker
   - systemctl enable containerd
+  - curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 
   - reboot
