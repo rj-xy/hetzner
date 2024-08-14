@@ -1,0 +1,17 @@
+{
+  "tasks": {
+    // Cache are the packages
+    "cache": "deno cache create.ts delete.ts",
+    "create": "deno run --env -A ./create.ts",
+    "delete": "deno run --env -A ./delete.ts",
+    "check-user-data": "cloud-init schema -c user-data.yaml --annotate",
+    // Download Hetzner Cloud API schema
+    "dl-schema": "curl -L https://docs.hetzner.cloud/spec.json --output ./hetzner-client/schema.json",
+    // Generate Hetzner Cloud API client
+    "gen-client": "deno run -A --unstable npm:openapi-typescript ./hetzner-client/schema.json -o ./hetzner-client/schema.d.ts"
+  },
+  "imports": {
+    "openapi-fetch": "npm:openapi-fetch@^0.10.2",
+    "zx": "npm:zx@^8.1.4"
+  }
+}

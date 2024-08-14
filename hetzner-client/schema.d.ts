@@ -13318,7 +13318,12 @@ export interface paths {
                                      */
                                     network_zone: string;
                                     /**
-                                     * @description Type of Subnetwork
+                                     * @description Type of Subnetwork.
+                                     *
+                                     *     - `cloud` - Used to connect cloud servers and load balancers.
+                                     *     - `server` - Same as the `cloud` type. **Deprecated**, use the `cloud` type instead.
+                                     *     - `vswitch` - Used to [connect cloud servers and load balancers with dedicated servers](https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch).
+                                     *
                                      * @enum {string}
                                      */
                                     type: "cloud" | "server" | "vswitch";
@@ -13451,7 +13456,12 @@ export interface paths {
                              */
                             network_zone: string;
                             /**
-                             * @description Type of Subnetwork
+                             * @description Type of Subnetwork.
+                             *
+                             *     - `cloud` - Used to connect cloud servers and load balancers.
+                             *     - `server` - Same as the `cloud` type. **Deprecated**, use the `cloud` type instead.
+                             *     - `vswitch` - Used to [connect cloud servers and load balancers with dedicated servers](https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch).
+                             *
                              * @enum {string}
                              */
                             type: "cloud" | "server" | "vswitch";
@@ -13593,7 +13603,12 @@ export interface paths {
                                      */
                                     network_zone: string;
                                     /**
-                                     * @description Type of Subnetwork
+                                     * @description Type of Subnetwork.
+                                     *
+                                     *     - `cloud` - Used to connect cloud servers and load balancers.
+                                     *     - `server` - Same as the `cloud` type. **Deprecated**, use the `cloud` type instead.
+                                     *     - `vswitch` - Used to [connect cloud servers and load balancers with dedicated servers](https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch).
+                                     *
                                      * @enum {string}
                                      */
                                     type: "cloud" | "server" | "vswitch";
@@ -14028,7 +14043,12 @@ export interface paths {
                                      */
                                     network_zone: string;
                                     /**
-                                     * @description Type of Subnetwork
+                                     * @description Type of Subnetwork.
+                                     *
+                                     *     - `cloud` - Used to connect cloud servers and load balancers.
+                                     *     - `server` - Same as the `cloud` type. **Deprecated**, use the `cloud` type instead.
+                                     *     - `vswitch` - Used to [connect cloud servers and load balancers with dedicated servers](https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch).
+                                     *
                                      * @enum {string}
                                      */
                                     type: "cloud" | "server" | "vswitch";
@@ -14221,7 +14241,12 @@ export interface paths {
                                      */
                                     network_zone: string;
                                     /**
-                                     * @description Type of Subnetwork
+                                     * @description Type of Subnetwork.
+                                     *
+                                     *     - `cloud` - Used to connect cloud servers and load balancers.
+                                     *     - `server` - Same as the `cloud` type. **Deprecated**, use the `cloud` type instead.
+                                     *     - `vswitch` - Used to [connect cloud servers and load balancers with dedicated servers](https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch).
+                                     *
                                      * @enum {string}
                                      */
                                     type: "cloud" | "server" | "vswitch";
@@ -14629,6 +14654,11 @@ export interface paths {
                         network_zone: string;
                         /**
                          * @description Type of Subnetwork.
+                         *
+                         *     - `cloud` - Used to connect cloud servers and load balancers.
+                         *     - `server` - Same as the `cloud` type. **Deprecated**, use the `cloud` type instead.
+                         *     - `vswitch` - Used to [connect cloud servers and load balancers with dedicated servers](https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch).
+                         *
                          * @enum {string}
                          */
                         type: "cloud" | "server" | "vswitch";
@@ -16166,29 +16196,14 @@ export interface paths {
                                 }[];
                                 /**
                                  * @deprecated
-                                 * @description The cost of additional traffic per TB.
-                                 *
-                                 *     **Deprecated**: This field is deprecated and will be set to `null` on 5 August 2024.
+                                 * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
                                  *     Please refer to the `price_per_tb_traffic` fields in `server_types` and `load_balancer_types` instead.
+                                 *
                                  *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
                                  *
+                                 * @example null
                                  */
-                                traffic: {
-                                    price_per_tb: {
-                                        /**
-                                         * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
-                                         */
-                                        gross: string;
-                                        /**
-                                         * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
-                                         */
-                                        net: string;
-                                    };
-                                };
+                                traffic: Record<string, never>;
                                 /**
                                  * Format: decimal
                                  * @description The VAT rate used for calculating prices with VAT
@@ -18289,15 +18304,13 @@ export interface paths {
                                 /**
                                  * Format: int64
                                  * @deprecated
-                                 * @description Free traffic per month in bytes
-                                 *
-                                 *     **Deprecated**: This field is deprecated and will be set to `null` on 5 August 2024.
+                                 * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
                                  *     Please refer to the `included_traffic` field in `prices` instead.
                                  *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
                                  *
-                                 * @example 654321
+                                 * @example null
                                  */
-                                included_traffic: number;
+                                included_traffic: number | null;
                                 /**
                                  * @description Memory a Server of this type will have in GB
                                  * @example 1
@@ -18486,15 +18499,13 @@ export interface paths {
                                 /**
                                  * Format: int64
                                  * @deprecated
-                                 * @description Free traffic per month in bytes
-                                 *
-                                 *     **Deprecated**: This field is deprecated and will be set to `null` on 5 August 2024.
+                                 * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
                                  *     Please refer to the `included_traffic` field in `prices` instead.
                                  *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
                                  *
-                                 * @example 654321
+                                 * @example null
                                  */
-                                included_traffic: number;
+                                included_traffic: number | null;
                                 /**
                                  * @description Memory a Server of this type will have in GB
                                  * @example 1
@@ -19273,15 +19284,13 @@ export interface paths {
                                     /**
                                      * Format: int64
                                      * @deprecated
-                                     * @description Free traffic per month in bytes
-                                     *
-                                     *     **Deprecated**: This field is deprecated and will be set to `null` on 5 August 2024.
+                                     * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
                                      *     Please refer to the `included_traffic` field in `prices` instead.
                                      *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
                                      *
-                                     * @example 654321
+                                     * @example null
                                      */
-                                    included_traffic: number;
+                                    included_traffic: number | null;
                                     /**
                                      * @description Memory a Server of this type will have in GB
                                      * @example 1
@@ -20263,15 +20272,13 @@ export interface paths {
                                     /**
                                      * Format: int64
                                      * @deprecated
-                                     * @description Free traffic per month in bytes
-                                     *
-                                     *     **Deprecated**: This field is deprecated and will be set to `null` on 5 August 2024.
+                                     * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
                                      *     Please refer to the `included_traffic` field in `prices` instead.
                                      *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
                                      *
-                                     * @example 654321
+                                     * @example null
                                      */
-                                    included_traffic: number;
+                                    included_traffic: number | null;
                                     /**
                                      * @description Memory a Server of this type will have in GB
                                      * @example 1
@@ -21261,15 +21268,13 @@ export interface paths {
                                     /**
                                      * Format: int64
                                      * @deprecated
-                                     * @description Free traffic per month in bytes
-                                     *
-                                     *     **Deprecated**: This field is deprecated and will be set to `null` on 5 August 2024.
+                                     * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
                                      *     Please refer to the `included_traffic` field in `prices` instead.
                                      *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
                                      *
-                                     * @example 654321
+                                     * @example null
                                      */
-                                    included_traffic: number;
+                                    included_traffic: number | null;
                                     /**
                                      * @description Memory a Server of this type will have in GB
                                      * @example 1
@@ -22006,15 +22011,13 @@ export interface paths {
                                     /**
                                      * Format: int64
                                      * @deprecated
-                                     * @description Free traffic per month in bytes
-                                     *
-                                     *     **Deprecated**: This field is deprecated and will be set to `null` on 5 August 2024.
+                                     * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
                                      *     Please refer to the `included_traffic` field in `prices` instead.
                                      *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
                                      *
-                                     * @example 654321
+                                     * @example null
                                      */
-                                    included_traffic: number;
+                                    included_traffic: number | null;
                                     /**
                                      * @description Memory a Server of this type will have in GB
                                      * @example 1

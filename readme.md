@@ -1,7 +1,7 @@
 # jacq.cc hetzner cli
 
 ```bash
-# First time use
+# First time use - install dependencies
 deno task cache
 
 # Create a new volume and server

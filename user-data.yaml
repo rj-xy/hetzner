@@ -12,18 +12,44 @@ users:
     shell: /bin/bash
     ssh_authorized_keys:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPh+R5aHphuQlIQ6Eh8STTH9gqD9mS5lLWhWpZnsZkKh r@jacq.cc"
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKhR9/6S+oIFLOxFWsMm4iIpKUBa8vcJ62CS4SwHJVAt r@jacq.cc"
 
 packages:
+  - curl
   - ufw
   - sshguard
 package_update: true
 package_upgrade: true
 
 runcmd:
+  # ufw
   - ufw default deny incoming
   - ufw default allow outgoing
-  - ufw limit ssh
+  # Custom SSH port, instead of 22
+  - ufw limit 51265
   - ufw allow http
   - ufw allow https
   - ufw enable
+
+  # sshd_config deny
+  - sed -i 's/#\?\(PermitRootLogin\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(PasswordAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(KbdInteractiveAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(ChallengeResponseAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(X11Forwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(AllowAgentForwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
+
+  # sshd_config allow
+  - sed -i 's/#\?\(Port\s*\).*$/\1 51265/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(AllowTcpForwarding\s*\).*$/\1 yes/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(MaxAuthTries\s*\).*$/\1 2/' /etc/ssh/sshd_config
+  - sed -i 's/#\?\(AuthorizedKeysFile\s*\).*$/\1 .ssh\/authorized_keys/' /etc/ssh/sshd_config
+
+  # docker
+  - curl -fsSL https://get.docker.com -o get-docker.sh
+  - sh ./get-docker.sh
+  - usermod -aG docker rj
+  - systemctl enable docker
+  - systemctl enable containerd
+
   - reboot
