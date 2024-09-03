@@ -1,4 +1,8 @@
 .env
+key.age
+key.pub
+
+cloud-init/user-data
 
 .terraform/
-.terraform.lock.hcl
+terraform.tfstate*

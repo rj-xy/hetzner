@@ -1,0 +1,20 @@
+version: "3.2"
+
+name: jacq
+
+services:
+  # Admin password: https://gist.github.com/deviantony/62c009b41bde5e078b1a7de9f11f5e55
+  port:
+    container_name: port
+    image: "portainer/portainer-ce:latest"
+    restart: unless-stopped
+    command: --admin-password '$2y$05$Qs22xzGeZRDgmu6pUwZRueP4wR3D6uqePe8YYcig1dEoMcjwGKSQC'
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  portainer_data:

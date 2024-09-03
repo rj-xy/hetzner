@@ -4,7 +4,7 @@
     "cache": "deno cache src/create.ts src/delete.ts",
     "create": "deno run --env -A ./src/create.ts",
     "delete": "deno run --env -A ./src/delete.ts",
-    "check-user-data": "cloud-init schema -c user-data.yaml --annotate",
+    "check-user-data": "cloud-init schema -c cloud-config.yaml --annotate",
     // Download Hetzner Cloud API schema
     "dl-schema": "curl -L https://docs.hetzner.cloud/spec.json --output ./src/hetzner-client/schema.json",
     // Generate Hetzner Cloud API client

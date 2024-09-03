@@ -23,8 +23,8 @@ const client = createClient<schema.paths>({
 const volume = await client.POST("/volumes", {
   body: {
     name: "jacq-volume-1",
-    size: 20,
     location: "nbg1",
+    size: 20,
     format: "ext4",
   },
 });
@@ -35,13 +35,13 @@ if (volume.error) {
 }
 
 // # Read from file user-data
-const userData = await Deno.readTextFile("./user-data.yaml");
+const userData = await Deno.readTextFile("../cloud-init/cloud-config.yaml");
 
 const server = await client.POST("/servers", {
   body: {
+    name: "jacq-server-1",
     location: "nbg1",
     image: "ubuntu-24.04",
-    name: "jacq-server-1",
     server_type: "cax21",
     start_after_create: true,
     automount: true,
@@ -63,5 +63,7 @@ if (server.error) {
 echo(chalk.green(`🌲 Server created: ${JSON.stringify(server.data)}`));
 
 const ipAddr = server.data.server.public_net.ipv4?.ip;
-echo(chalk.blue(`ssh-keygen -f '/home/rj/.ssh/known_hosts' -R '${ipAddr}'`));
+echo(
+  chalk.blue(`ssh-keygen -f '/home/rj/.ssh/known_hosts' -R '[${ipAddr}]:51265'`)
+);
 echo(chalk.blue(`ssh -i ~/.ssh/id_ed25519 -p 51265 rj@${ipAddr}`));

@@ -1,25 +1,49 @@
 #cloud-config
+# Check: cloud-init status --wait
+# https://cloudinit.readthedocs.io/en/latest/
+
 fqdn: jacq.cc
 hostname: jacq.cc
 locale: en_AU.UTF-8
 timezone: Australia/Brisbane
 
+manage-resolv-conf: true
+resolv_conf:
+  nameservers: ["1.1.1.1", "1.0.0.1"]
+
 users:
+  # 🔥 UPDATE USER
+  - default
   - name: rj
     lock_passwd: true
     groups: sudo, users, admin, docker
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
+    # Whether to disable password logins for the user.
+    lock_passwd: true
     ssh_authorized_keys:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPh+R5aHphuQlIQ6Eh8STTH9gqD9mS5lLWhWpZnsZkKh r@jacq.cc"
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKhR9/6S+oIFLOxFWsMm4iIpKUBa8vcJ62CS4SwHJVAt r@jacq.cc"
 
-files:
-  - path: /home/rj/.bash_aliases
-    source: .bash_aliases
-  - path: /home/rj/compose.yaml
-    source: compose.yaml
-    
+# write_files:
+#   - path: /home/rj/.bash_aliases
+
+# files:
+#   - path: /home/rj/.bash_aliases
+#     source: .bash_aliases
+#   - path: /home/rj/compose.yaml
+#     source: compose.yaml
+
+# # https://cloudinit.readthedocs.io/en/0.7.9/topics/examples.html#add-apt-repositories
+# apt:
+#   primary:
+#     - arches: [default]
+#       search:
+#         - http://archive.ubuntu.com
+#         - https://mirror.aarnet.edu.au/ubuntu/
+#         - http://au.archive.ubuntu.com/ubuntu
+#         - http://security.ubuntu.com/ubuntu/
+
 packages:
   - curl
   - ufw
@@ -35,10 +59,10 @@ runcmd:
   # ufw
   - ufw default deny incoming
   - ufw default allow outgoing
-  # Custom SSH port, instead of 22
-  - ufw limit 51265
   - ufw allow http
   - ufw allow https
+  # Custom SSH port, instead of 22
+  - ufw limit 51265
   - ufw enable
 
   # sshd_config deny
@@ -54,6 +78,7 @@ runcmd:
   - sed -i 's/#\?\(AllowTcpForwarding\s*\).*$/\1 yes/' /etc/ssh/sshd_config
   - sed -i 's/#\?\(MaxAuthTries\s*\).*$/\1 2/' /etc/ssh/sshd_config
   - sed -i 's/#\?\(AuthorizedKeysFile\s*\).*$/\1 .ssh\/authorized_keys/' /etc/ssh/sshd_config
+  - sed -i '$a AllowUsers rj' /etc/ssh/sshd_config
 
   # docker
   - curl -fsSL https://get.docker.com -o get-docker.sh
@@ -62,5 +87,6 @@ runcmd:
   - systemctl enable docker
   - systemctl enable containerd
   - curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+  - rm -f /get-docker.sh
 
   - reboot
