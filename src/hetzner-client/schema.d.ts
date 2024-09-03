@@ -1766,7 +1766,7 @@ export interface paths {
                                  *      */
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -1774,7 +1774,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -1782,7 +1782,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -1794,23 +1794,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -1976,7 +1976,7 @@ export interface paths {
                                  *      */
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -1984,7 +1984,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -1992,7 +1992,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -2004,23 +2004,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -2098,7 +2098,10 @@ export interface paths {
         };
         /**
          * Get all Firewalls
-         * @description Returns all Firewall objects.
+         * @description Returns all [Firewalls](#firewalls).
+         *
+         *     Use the provided URI parameters to modify the result.
+         *
          */
         get: {
             parameters: {
@@ -2126,7 +2129,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description The `firewalls` key contains an array of Firewall objects */
+                /** @description The `firewalls` key contains the [Firewalls](#firewalls). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -2135,7 +2138,13 @@ export interface paths {
                         "application/json": {
                             firewalls: {
                                 applied_to: {
+                                    /** @description Resources applied to via this [Label Selector](#label-selector).
+                                     *      */
                                     applied_to_resources?: {
+                                        /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                         *
+                                         *     Only set for `type` `server`, otherwise `null`.
+                                         *      */
                                         server?: {
                                             /**
                                              * Format: int64
@@ -2145,12 +2154,16 @@ export interface paths {
                                             id: number;
                                         };
                                         /**
-                                         * @description Type of resource referenced
+                                         * @description Type of resource.
                                          * @example server
                                          * @enum {string}
                                          */
                                         type?: "server";
                                     }[];
+                                    /** @description [Label Selector](#label-selector) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `label_selector`, otherwise `null`.
+                                     *      */
                                     label_selector?: {
                                         /**
                                          * @description Label selector
@@ -2158,6 +2171,10 @@ export interface paths {
                                          */
                                         selector: string;
                                     };
+                                    /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `server`, otherwise `null`.
+                                     *      */
                                     server?: {
                                         /**
                                          * Format: int64
@@ -2167,7 +2184,7 @@ export interface paths {
                                         id: number;
                                     };
                                     /**
-                                     * @description Type of resource referenced
+                                     * @description The type of resource to apply.
                                      * @example server
                                      * @enum {string}
                                      */
@@ -2198,50 +2215,72 @@ export interface paths {
                                     [key: string]: string | undefined;
                                 };
                                 /**
-                                 * @description Name of the Resource. Must be unique per Project.
-                                 * @example my-resource
+                                 * @description Name of the [Firewall](#firewalls).
+                                 *
+                                 *     Limited to a maximum of 128 characters.
+                                 *
+                                 *     Must be unique per Project.
+                                 *
+                                 * @example new-name
                                  */
                                 name: string;
                                 rules: {
-                                    /** @description Description of the Rule */
+                                    /** @description Description of the rule. */
                                     description?: string | null;
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic (`direction` set to `out`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic.
+                                     *
+                                     *     The `direction` must be set to `out`.
+                                     *
+                                     *     IPs must be in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example []
                                      */
                                     destination_ips: string[];
                                     /**
-                                     * @description Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                                     * @description Traffic direction in which the rule should be applied to.
+                                     *
+                                     *     Use `source_ips` for direction `in` and `destination_ips` for direction `out` to specify IPs.
+                                     *
                                      * @example in
                                      * @enum {string}
                                      */
                                     direction: "in" | "out";
                                     /**
-                                     * @description Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                                     * @description Port or port range to apply the rule for.
+                                     *
+                                     *     Only applicable for protocols `tcp` and `udp`.
+                                     *
+                                     *     A port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include
+                                     *     all ports starting from 1024 up to port 5000.
+                                     *
                                      * @example 80
                                      */
                                     port: string | null;
                                     /**
-                                     * @description Type of traffic to allow
+                                     * @description Network protocol to apply the rule for.
                                      * @enum {string}
                                      */
                                     protocol: "tcp" | "udp" | "icmp" | "esp" | "gre";
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic (`direction` set to `in`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic.
+                                     *
+                                     *     The `direction` must be set to `in`.
+                                     *
+                                     *     IPs must be provided in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example [
@@ -2303,15 +2342,15 @@ export interface paths {
         put?: never;
         /**
          * Create a Firewall
-         * @description Creates a new Firewall.
+         * @description Create a [Firewall](#firewalls).
          *
-         *     #### Call specific error codes
+         *     #### Error Codes specific to this Call
          *
-         *     | Code                          | Description                                                   |
-         *     |------------------------------ |-------------------------------------------------------------- |
-         *     | `server_already_added`        | Server added more than one time to resource                   |
-         *     | `incompatible_network_type`   | The Network type is incompatible for the given resource       |
-         *     | `firewall_resource_not_found` | The resource the Firewall should be attached to was not found |
+         *     | Code                          | Description                                                                 |
+         *     |------------------------------ |-----------------------------------------------------------------------------|
+         *     | `server_already_added`        | [Server](#servers) applied more than once                                   |
+         *     | `incompatible_network_type`   | The resources network type is not supported by [Firewalls](#firewalls)      |
+         *     | `firewall_resource_not_found` | The resource the [Firewall](#firewalls) should be attached to was not found |
          *
          */
         post: {
@@ -2324,23 +2363,35 @@ export interface paths {
             requestBody?: {
                 content: {
                     "application/json": {
-                        /** @description Resources the Firewall should be applied to after creation */
+                        /** @description Resources to apply the [Firewall](#firewalls) to.
+                         *
+                         *     Resources added directly are taking precedence over those added via a [Label Selector](#label-selector).
+                         *      */
                         apply_to?: {
-                            /** @description Configuration for type LabelSelector, required if type is `label_selector` */
+                            /** @description [Label Selector](#label-selector) the [Firewall](#firewalls) is applied to.
+                             *
+                             *     Only set for `type` `label_selector`, otherwise `null`.
+                             *      */
                             label_selector?: {
-                                /** @description Label selector */
+                                /**
+                                 * @description The selector.
+                                 * @example env=prod
+                                 */
                                 selector: string;
                             };
-                            /** @description Configuration for type Server, required if type is `server` */
+                            /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                             *
+                             *     Only set for `type` `server`, otherwise `null`.
+                             *      */
                             server?: {
                                 /**
                                  * Format: int64
-                                 * @description ID of the Server
+                                 * @description ID of the [Server](#servers).
                                  */
                                 id: number;
                             };
                             /**
-                             * @description Type of the resource
+                             * @description Type of the resource.
                              * @enum {string}
                              */
                             type: "server" | "label_selector";
@@ -2359,17 +2410,19 @@ export interface paths {
                             [key: string]: string | undefined;
                         };
                         /**
-                         * @description Name of the Firewall.
+                         * @description Name of the [Firewall](#firewalls).
                          *
                          *     Limited to a maximum of 128 characters.
                          *
-                         * @example Corporate Intranet Protection
+                         *     Must be unique per Project.
+                         *
+                         * @example new-name
                          */
                         name: string;
                         /**
                          * @description Array of rules.
                          *
-                         *     Limited to a maximum of 50 rules per Firewall.
+                         *     Rules are limited to 50 entries per [Firewall](#firewalls) and [500 effective rules](https://docs.hetzner.com/cloud/firewalls/overview#limits).
                          *
                          * @example [
                          *       {
@@ -2385,45 +2438,62 @@ export interface paths {
                          *     ]
                          */
                         rules?: {
-                            /** @description Description of the Rule */
+                            /** @description Description of the rule. */
                             description?: string | null;
                             /**
-                             * @description List of permitted IPv4/IPv6 addresses for outgoing traffic (`direction` set to `out`)
-                             *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                             * @description List of permitted IPv4/IPv6 addresses for outgoing traffic.
+                             *
+                             *     The `direction` must be set to `out`.
+                             *
+                             *     IPs must be in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                              *     blocks at most.
                              *
                              *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                              *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                              *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                             *
                              *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                              *
                              * @example []
                              */
                             destination_ips?: string[];
                             /**
-                             * @description Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                             * @description Traffic direction in which the rule should be applied to.
+                             *
+                             *     Use `source_ips` for direction `in` and `destination_ips` for direction `out` to specify IPs.
+                             *
                              * @example in
                              * @enum {string}
                              */
                             direction: "in" | "out";
                             /**
-                             * @description Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                             * @description Port or port range to apply the rule for.
+                             *
+                             *     Only applicable for protocols `tcp` and `udp`.
+                             *
+                             *     A port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include
+                             *     all ports starting from 1024 up to port 5000.
+                             *
                              * @example 80
                              */
                             port?: string;
                             /**
-                             * @description Type of traffic to allow
+                             * @description Network protocol to apply the rule for.
                              * @enum {string}
                              */
                             protocol: "tcp" | "udp" | "icmp" | "esp" | "gre";
                             /**
-                             * @description List of permitted IPv4/IPv6 addresses for incoming traffic (`direction` set to `in`)
-                             *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                             * @description List of permitted IPv4/IPv6 addresses for incoming traffic.
+                             *
+                             *     The `direction` must be set to `in`.
+                             *
+                             *     IPs must be provided in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                              *     blocks at most.
                              *
                              *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                              *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                              *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                             *
                              *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                              *
                              * @example [
@@ -2438,7 +2508,7 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description The `firewall` key contains the Firewall that was just created */
+                /** @description The `firewall` key contains the created [Firewall](#firewalls). */
                 201: {
                     headers: {
                         [name: string]: unknown;
@@ -2551,7 +2621,13 @@ export interface paths {
                             /** FirewallResponse */
                             firewall?: {
                                 applied_to: {
+                                    /** @description Resources applied to via this [Label Selector](#label-selector).
+                                     *      */
                                     applied_to_resources?: {
+                                        /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                         *
+                                         *     Only set for `type` `server`, otherwise `null`.
+                                         *      */
                                         server?: {
                                             /**
                                              * Format: int64
@@ -2561,12 +2637,16 @@ export interface paths {
                                             id: number;
                                         };
                                         /**
-                                         * @description Type of resource referenced
+                                         * @description Type of resource.
                                          * @example server
                                          * @enum {string}
                                          */
                                         type?: "server";
                                     }[];
+                                    /** @description [Label Selector](#label-selector) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `label_selector`, otherwise `null`.
+                                     *      */
                                     label_selector?: {
                                         /**
                                          * @description Label selector
@@ -2574,6 +2654,10 @@ export interface paths {
                                          */
                                         selector: string;
                                     };
+                                    /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `server`, otherwise `null`.
+                                     *      */
                                     server?: {
                                         /**
                                          * Format: int64
@@ -2583,7 +2667,7 @@ export interface paths {
                                         id: number;
                                     };
                                     /**
-                                     * @description Type of resource referenced
+                                     * @description The type of resource to apply.
                                      * @example server
                                      * @enum {string}
                                      */
@@ -2614,50 +2698,72 @@ export interface paths {
                                     [key: string]: string | undefined;
                                 };
                                 /**
-                                 * @description Name of the Resource. Must be unique per Project.
-                                 * @example my-resource
+                                 * @description Name of the [Firewall](#firewalls).
+                                 *
+                                 *     Limited to a maximum of 128 characters.
+                                 *
+                                 *     Must be unique per Project.
+                                 *
+                                 * @example new-name
                                  */
                                 name: string;
                                 rules: {
-                                    /** @description Description of the Rule */
+                                    /** @description Description of the rule. */
                                     description?: string | null;
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic (`direction` set to `out`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic.
+                                     *
+                                     *     The `direction` must be set to `out`.
+                                     *
+                                     *     IPs must be in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example []
                                      */
                                     destination_ips: string[];
                                     /**
-                                     * @description Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                                     * @description Traffic direction in which the rule should be applied to.
+                                     *
+                                     *     Use `source_ips` for direction `in` and `destination_ips` for direction `out` to specify IPs.
+                                     *
                                      * @example in
                                      * @enum {string}
                                      */
                                     direction: "in" | "out";
                                     /**
-                                     * @description Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                                     * @description Port or port range to apply the rule for.
+                                     *
+                                     *     Only applicable for protocols `tcp` and `udp`.
+                                     *
+                                     *     A port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include
+                                     *     all ports starting from 1024 up to port 5000.
+                                     *
                                      * @example 80
                                      */
                                     port: string | null;
                                     /**
-                                     * @description Type of traffic to allow
+                                     * @description Network protocol to apply the rule for.
                                      * @enum {string}
                                      */
                                     protocol: "tcp" | "udp" | "icmp" | "esp" | "gre";
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic (`direction` set to `in`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic.
+                                     *
+                                     *     The `direction` must be set to `in`.
+                                     *
+                                     *     IPs must be provided in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example [
@@ -2689,7 +2795,10 @@ export interface paths {
         };
         /**
          * Get all Actions
-         * @description Returns all Action objects. You can `sort` the results by using the sort URI parameter, and filter them with the `status` and `id` parameter.
+         * @description Returns all [Actions](#actions) for [Firewalls](#firewalls).
+         *
+         *     Use the provided URI parameters to modify the result.
+         *
          */
         get: {
             parameters: {
@@ -2717,7 +2826,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description The `actions` key contains a list of Actions */
+                /** @description The `actions` key contains a list of [Actions](#actions). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -2849,7 +2958,7 @@ export interface paths {
         };
         /**
          * Get an Action
-         * @description Returns a specific Action object.
+         * @description Returns the specific [Action](#actions).
          */
         get: {
             parameters: {
@@ -2863,7 +2972,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description The `action` key in the reply has this structure */
+                /** @description The `action` key contains the [Action](#actions). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -2954,7 +3063,7 @@ export interface paths {
         };
         /**
          * Get a Firewall
-         * @description Gets a specific Firewall object.
+         * @description Returns a single [Firewall](#firewalls).
          */
         get: {
             parameters: {
@@ -2968,7 +3077,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description The `firewall` key contains a Firewall object */
+                /** @description The `firewall` key contains the [Firewall](#firewalls). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -2978,7 +3087,13 @@ export interface paths {
                             /** FirewallResponse */
                             firewall: {
                                 applied_to: {
+                                    /** @description Resources applied to via this [Label Selector](#label-selector).
+                                     *      */
                                     applied_to_resources?: {
+                                        /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                         *
+                                         *     Only set for `type` `server`, otherwise `null`.
+                                         *      */
                                         server?: {
                                             /**
                                              * Format: int64
@@ -2988,12 +3103,16 @@ export interface paths {
                                             id: number;
                                         };
                                         /**
-                                         * @description Type of resource referenced
+                                         * @description Type of resource.
                                          * @example server
                                          * @enum {string}
                                          */
                                         type?: "server";
                                     }[];
+                                    /** @description [Label Selector](#label-selector) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `label_selector`, otherwise `null`.
+                                     *      */
                                     label_selector?: {
                                         /**
                                          * @description Label selector
@@ -3001,6 +3120,10 @@ export interface paths {
                                          */
                                         selector: string;
                                     };
+                                    /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `server`, otherwise `null`.
+                                     *      */
                                     server?: {
                                         /**
                                          * Format: int64
@@ -3010,7 +3133,7 @@ export interface paths {
                                         id: number;
                                     };
                                     /**
-                                     * @description Type of resource referenced
+                                     * @description The type of resource to apply.
                                      * @example server
                                      * @enum {string}
                                      */
@@ -3041,50 +3164,72 @@ export interface paths {
                                     [key: string]: string | undefined;
                                 };
                                 /**
-                                 * @description Name of the Resource. Must be unique per Project.
-                                 * @example my-resource
+                                 * @description Name of the [Firewall](#firewalls).
+                                 *
+                                 *     Limited to a maximum of 128 characters.
+                                 *
+                                 *     Must be unique per Project.
+                                 *
+                                 * @example new-name
                                  */
                                 name: string;
                                 rules: {
-                                    /** @description Description of the Rule */
+                                    /** @description Description of the rule. */
                                     description?: string | null;
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic (`direction` set to `out`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic.
+                                     *
+                                     *     The `direction` must be set to `out`.
+                                     *
+                                     *     IPs must be in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example []
                                      */
                                     destination_ips: string[];
                                     /**
-                                     * @description Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                                     * @description Traffic direction in which the rule should be applied to.
+                                     *
+                                     *     Use `source_ips` for direction `in` and `destination_ips` for direction `out` to specify IPs.
+                                     *
                                      * @example in
                                      * @enum {string}
                                      */
                                     direction: "in" | "out";
                                     /**
-                                     * @description Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                                     * @description Port or port range to apply the rule for.
+                                     *
+                                     *     Only applicable for protocols `tcp` and `udp`.
+                                     *
+                                     *     A port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include
+                                     *     all ports starting from 1024 up to port 5000.
+                                     *
                                      * @example 80
                                      */
                                     port: string | null;
                                     /**
-                                     * @description Type of traffic to allow
+                                     * @description Network protocol to apply the rule for.
                                      * @enum {string}
                                      */
                                     protocol: "tcp" | "udp" | "icmp" | "esp" | "gre";
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic (`direction` set to `in`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic.
+                                     *
+                                     *     The `direction` must be set to `in`.
+                                     *
+                                     *     IPs must be provided in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example [
@@ -3103,11 +3248,11 @@ export interface paths {
         };
         /**
          * Update a Firewall
-         * @description Updates the Firewall.
+         * @description Update a [Firewall](#firewalls).
          *
-         *     Note that when updating labels, the Firewall's current set of labels will be replaced with the labels provided in the request body. So, for example, if you want to add a new label, you have to provide all existing labels plus the new label in the request body.
+         *     Provided [Labels](#labels) will overwritte the existing ones.
          *
-         *     Note: if the Firewall object changes during the request, the response will be a “conflict” error.
+         *     In case of a parallel running change on the [Firewall](#firewalls) a `conflict` error will be returned.
          *
          */
         put: {
@@ -3137,7 +3282,12 @@ export interface paths {
                             [key: string]: string | undefined;
                         };
                         /**
-                         * @description New Firewall name
+                         * @description Name of the [Firewall](#firewalls).
+                         *
+                         *     Limited to a maximum of 128 characters.
+                         *
+                         *     Must be unique per Project.
+                         *
                          * @example new-name
                          */
                         name?: string;
@@ -3145,7 +3295,7 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description The `firewall` key contains the Firewall that was just updated */
+                /** @description The `firewall` key contains the updated [Firewall](#firewalls). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -3155,7 +3305,13 @@ export interface paths {
                             /** FirewallResponse */
                             firewall: {
                                 applied_to: {
+                                    /** @description Resources applied to via this [Label Selector](#label-selector).
+                                     *      */
                                     applied_to_resources?: {
+                                        /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                         *
+                                         *     Only set for `type` `server`, otherwise `null`.
+                                         *      */
                                         server?: {
                                             /**
                                              * Format: int64
@@ -3165,12 +3321,16 @@ export interface paths {
                                             id: number;
                                         };
                                         /**
-                                         * @description Type of resource referenced
+                                         * @description Type of resource.
                                          * @example server
                                          * @enum {string}
                                          */
                                         type?: "server";
                                     }[];
+                                    /** @description [Label Selector](#label-selector) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `label_selector`, otherwise `null`.
+                                     *      */
                                     label_selector?: {
                                         /**
                                          * @description Label selector
@@ -3178,6 +3338,10 @@ export interface paths {
                                          */
                                         selector: string;
                                     };
+                                    /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                                     *
+                                     *     Only set for `type` `server`, otherwise `null`.
+                                     *      */
                                     server?: {
                                         /**
                                          * Format: int64
@@ -3187,7 +3351,7 @@ export interface paths {
                                         id: number;
                                     };
                                     /**
-                                     * @description Type of resource referenced
+                                     * @description The type of resource to apply.
                                      * @example server
                                      * @enum {string}
                                      */
@@ -3218,50 +3382,72 @@ export interface paths {
                                     [key: string]: string | undefined;
                                 };
                                 /**
-                                 * @description Name of the Resource. Must be unique per Project.
-                                 * @example my-resource
+                                 * @description Name of the [Firewall](#firewalls).
+                                 *
+                                 *     Limited to a maximum of 128 characters.
+                                 *
+                                 *     Must be unique per Project.
+                                 *
+                                 * @example new-name
                                  */
                                 name: string;
                                 rules: {
-                                    /** @description Description of the Rule */
+                                    /** @description Description of the rule. */
                                     description?: string | null;
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic (`direction` set to `out`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for outgoing traffic.
+                                     *
+                                     *     The `direction` must be set to `out`.
+                                     *
+                                     *     IPs must be in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example []
                                      */
                                     destination_ips: string[];
                                     /**
-                                     * @description Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                                     * @description Traffic direction in which the rule should be applied to.
+                                     *
+                                     *     Use `source_ips` for direction `in` and `destination_ips` for direction `out` to specify IPs.
+                                     *
                                      * @example in
                                      * @enum {string}
                                      */
                                     direction: "in" | "out";
                                     /**
-                                     * @description Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                                     * @description Port or port range to apply the rule for.
+                                     *
+                                     *     Only applicable for protocols `tcp` and `udp`.
+                                     *
+                                     *     A port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include
+                                     *     all ports starting from 1024 up to port 5000.
+                                     *
                                      * @example 80
                                      */
                                     port: string | null;
                                     /**
-                                     * @description Type of traffic to allow
+                                     * @description Network protocol to apply the rule for.
                                      * @enum {string}
                                      */
                                     protocol: "tcp" | "udp" | "icmp" | "esp" | "gre";
                                     /**
-                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic (`direction` set to `in`)
-                                     *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                                     * @description List of permitted IPv4/IPv6 addresses for incoming traffic.
+                                     *
+                                     *     The `direction` must be set to `in`.
+                                     *
+                                     *     IPs must be provided in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                                      *     blocks at most.
                                      *
                                      *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                                      *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                                      *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                                     *
                                      *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                                      *
                                      * @example [
@@ -3281,13 +3467,13 @@ export interface paths {
         post?: never;
         /**
          * Delete a Firewall
-         * @description Deletes a Firewall.
+         * @description Deletes the [Firewall](#firewalls).
          *
-         *     #### Call specific error codes
+         *     #### Error Codes specific to this Call
          *
-         *     | Code                 | Description                               |
-         *     |--------------------- |-------------------------------------------|
-         *     | `resource_in_use`    | Firewall must not be in use to be deleted |
+         *     | Code                 | Description                                        |
+         *     |--------------------- |----------------------------------------------------|
+         *     | `resource_in_use`    | [Firewall](#firewalls) still applied to a resource |
          *
          */
         delete: {
@@ -3325,7 +3511,10 @@ export interface paths {
         };
         /**
          * Get all Actions for a Firewall
-         * @description Returns all Action objects for a Firewall. You can sort the results by using the `sort` URI parameter, and filter them with the `status` parameter.
+         * @description Returns all [Actions](#actions) for the [Firewall](#firewalls).
+         *
+         *     Use the provided URI parameters to modify the result.
+         *
          */
         get: {
             parameters: {
@@ -3352,7 +3541,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description The `actions` key contains a list of Actions */
+                /** @description The `actions` key contains a list of [Actions](#actions). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -3486,17 +3675,22 @@ export interface paths {
         put?: never;
         /**
          * Apply to Resources
-         * @description Applies one Firewall to multiple resources.
+         * @description Applies a [Firewall](#firewalls) to multiple resources.
          *
-         *     Currently servers (public network interface) and label selectors are supported.
+         *     Supported resources:
+         *     - [Servers](#servers) (with a public network interface)
+         *     - [Label Selectors](#label-selector)
          *
-         *     #### Call specific error codes
+         *     A server can be applied to [a maximum of 5 Firewalls](https://docs.hetzner.com/cloud/firewalls/overview#limits).
          *
-         *     | Code                          | Description                                                   |
-         *     |-------------------------------|---------------------------------------------------------------|
-         *     | `firewall_already_applied`    | Firewall was already applied on resource                      |
-         *     | `incompatible_network_type`   | The Network type is incompatible for the given resource       |
-         *     | `firewall_resource_not_found` | The resource the Firewall should be attached to was not found |
+         *     #### Error Codes specific to this Call
+         *
+         *     | Code                          | Description                                                                                     |
+         *     |-------------------------------|-------------------------------------------------------------------------------------------------|
+         *     | `firewall_already_applied`    | [Firewall](#firewalls) is already applied to resource                                           |
+         *     | `incompatible_network_type`   | The network type of the resource is not supported by [Firewalls](#firewalls)                    |
+         *     | `firewall_resource_not_found` | The resource the [Firewall](#firewalls) should be applied to was not found                      |
+         *     | `private_net_only_server`     | The [Server](#servers) the [Firewall](#firewalls) should be applied to has no public interface  |
          *
          */
         post: {
@@ -3522,26 +3716,35 @@ export interface paths {
                      *       ]
                      *     } */
                     "application/json": {
-                        /** @description Resources the Firewall should be applied to */
+                        /** @description Resources to apply the [Firewall](#firewalls) to.
+                         *
+                         *     Extends existing resources.
+                         *      */
                         apply_to: {
-                            /** @description Configuration for type label_selector, required if type is `label_selector` */
+                            /** @description [Label Selector](#label-selector) the [Firewall](#firewalls) is applied to.
+                             *
+                             *     Only set for `type` `label_selector`, otherwise `null`.
+                             *      */
                             label_selector?: {
                                 /**
-                                 * @description Label selector
+                                 * @description The selector.
                                  * @example env=prod
                                  */
                                 selector: string;
                             };
-                            /** @description Configuration for type server, required if type is `server` */
+                            /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                             *
+                             *     Only set for `type` `server`, otherwise `null`.
+                             *      */
                             server?: {
                                 /**
                                  * Format: int64
-                                 * @description ID of the Server
+                                 * @description ID of the [Server](#servers).
                                  */
                                 id: number;
                             };
                             /**
-                             * @description Type of the resource
+                             * @description Type of the resource.
                              * @enum {string}
                              */
                             type: "server" | "label_selector";
@@ -3550,7 +3753,7 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description The `actions` key contains multiple `apply_firewall` Actions */
+                /** @description The `actions` key contains multiple [Actions](#actions) with the `apply_firewall` command. */
                 201: {
                     headers: {
                         [name: string]: unknown;
@@ -3640,17 +3843,18 @@ export interface paths {
         put?: never;
         /**
          * Remove from Resources
-         * @description Removes one Firewall from multiple resources.
+         * @description Removes a [Firewall](#firewalls) from multiple resources.
          *
-         *     Currently only Servers (and their public network interfaces) are supported.
+         *     Supported resources:
+         *     - [Servers](#servers) (with a public network interface)
          *
-         *     #### Call specific error codes
+         *     #### Error Codes specific to this Call
          *
-         *     | Code                                  | Description                                                            |
-         *     |---------------------------------------|------------------------------------------------------------------------|
-         *     | `firewall_already_removed`            | Firewall was already removed from the resource                         |
-         *     | `firewall_resource_not_found`         | The resource the Firewall should be attached to was not found          |
-         *     | `firewall_managed_by_label_selector`  | Firewall was applied via label selector and cannot be removed manually |
+         *     | Code                                  | Description                                                                                             |
+         *     |---------------------------------------|---------------------------------------------------------------------------------------------------------|
+         *     | `firewall_already_removed`            | [Firewall](#firewalls) is already removed from the resource                                             |
+         *     | `firewall_resource_not_found`         | The resource the [Firewall](#firewalls) should be removed from was not found                            |
+         *     | `firewall_managed_by_label_selector`  | [Firewall](#firewall) is applied via a [Label Selector](#label-selector) and cannot be removed manually |
          *
          */
         post: {
@@ -3676,26 +3880,32 @@ export interface paths {
                      *       ]
                      *     } */
                     "application/json": {
-                        /** @description Resources the Firewall should be removed from */
+                        /** @description Resources to remove the [Firewall](#firewalls) from. */
                         remove_from: {
-                            /** @description Configuration for type label_selector, required if type is `label_selector` */
+                            /** @description [Label Selector](#label-selector) the [Firewall](#firewalls) is applied to.
+                             *
+                             *     Only set for `type` `label_selector`, otherwise `null`.
+                             *      */
                             label_selector?: {
                                 /**
-                                 * @description Label selector
+                                 * @description The selector.
                                  * @example env=prod
                                  */
                                 selector: string;
                             };
-                            /** @description Configuration for type server, required if type is `server` */
+                            /** @description [Server](#servers) the [Firewall](#firewalls) is applied to.
+                             *
+                             *     Only set for `type` `server`, otherwise `null`.
+                             *      */
                             server?: {
                                 /**
                                  * Format: int64
-                                 * @description ID of the Server
+                                 * @description ID of the [Server](#servers).
                                  */
                                 id: number;
                             };
                             /**
-                             * @description Type of the resource
+                             * @description Type of the resource.
                              * @enum {string}
                              */
                             type: "server" | "label_selector";
@@ -3704,7 +3914,7 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description The `actions` key contains multiple `remove_firewall` Actions */
+                /** @description The `actions` key contains multiple [Actions](#actions) with the `remove_firewall` command. */
                 201: {
                     headers: {
                         [name: string]: unknown;
@@ -3794,16 +4004,11 @@ export interface paths {
         put?: never;
         /**
          * Set Rules
-         * @description Sets the rules of a Firewall.
+         * @description Set the rules of a [Firewall](#firewalls).
          *
-         *     All existing rules will be overwritten. Pass an empty `rules` array to remove all rules.
-         *     The maximum amount of rules that can be defined is 50.
+         *     Overwrites the existing rules with the given ones. Pass an empty array to remove all rules.
          *
-         *     #### Call specific error codes
-         *
-         *     | Code                          | Description                                                   |
-         *     |-------------------------------|---------------------------------------------------------------|
-         *     | `firewall_resource_not_found` | The resource the Firewall should be attached to was not found |
+         *     Rules are limited to 50 entries per [Firewall](#firewalls) and [500 effective rules](https://docs.hetzner.com/cloud/firewalls/overview#limits).
          *
          */
         post: {
@@ -3821,48 +4026,67 @@ export interface paths {
                     "application/json": {
                         /** @description Array of rules.
                          *
-                         *     Limited to a maximum of 50 rules per Firewall.
+                         *     Rules are limited to 50 entries per [Firewall](#firewalls) and [500 effective rules](https://docs.hetzner.com/cloud/firewalls/overview#limits).
+                         *
+                         *     Existing rules will be replaced.
                          *      */
                         rules: {
-                            /** @description Description of the Rule */
+                            /** @description Description of the rule. */
                             description?: string | null;
                             /**
-                             * @description List of permitted IPv4/IPv6 addresses for outgoing traffic (`direction` set to `out`)
-                             *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                             * @description List of permitted IPv4/IPv6 addresses for outgoing traffic.
+                             *
+                             *     The `direction` must be set to `out`.
+                             *
+                             *     IPs must be in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                              *     blocks at most.
                              *
                              *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                              *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                              *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                             *
                              *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                              *
                              * @example []
                              */
                             destination_ips?: string[];
                             /**
-                             * @description Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                             * @description Traffic direction in which the rule should be applied to.
+                             *
+                             *     Use `source_ips` for direction `in` and `destination_ips` for direction `out` to specify IPs.
+                             *
                              * @example in
                              * @enum {string}
                              */
                             direction: "in" | "out";
                             /**
-                             * @description Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                             * @description Port or port range to apply the rule for.
+                             *
+                             *     Only applicable for protocols `tcp` and `udp`.
+                             *
+                             *     A port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include
+                             *     all ports starting from 1024 up to port 5000.
+                             *
                              * @example 80
                              */
                             port?: string;
                             /**
-                             * @description Type of traffic to allow
+                             * @description Network protocol to apply the rule for.
                              * @enum {string}
                              */
                             protocol: "tcp" | "udp" | "icmp" | "esp" | "gre";
                             /**
-                             * @description List of permitted IPv4/IPv6 addresses for incoming traffic (`direction` set to `in`)
-                             *     in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
+                             * @description List of permitted IPv4/IPv6 addresses for incoming traffic.
+                             *
+                             *     The `direction` must be set to `in`.
+                             *
+                             *     IPs must be provided in [CIDR block notation](https://wikipedia.org/wiki/CIDR). You can specify 100 CIDR
                              *     blocks at most.
                              *
                              *     The CIDR blocks may refer to networks (with empty host bits) or single hosts.
                              *     For example, a network could be defined with `10.0.1.0/24` or `2001:db8:ff00:42::/64`,
                              *     and a single host with `10.0.1.1/32` or `2001:db8:ff00:42::8329/128`.
+                             *
                              *     Use `0.0.0.0/0` to allow any IPv4 addresses and `::/0` to allow any IPv6 addresses.
                              *
                              * @example [
@@ -3877,7 +4101,7 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description The `action` key contains one `set_firewall_rules` Action plus one `apply_firewall` Action per resource where the Firewall is active */
+                /** @description The `action` key contains an [Action](#actions) with the `set_firewall_rules` command and additionally one with the `apply_firewall` command per resource of the [Firewall](#firewalls). */
                 201: {
                     headers: {
                         [name: string]: unknown;
@@ -3965,7 +4189,7 @@ export interface paths {
         };
         /**
          * Get an Action for a Firewall
-         * @description Returns a specific Action for a Firewall.
+         * @description Returns a specific [Action](#actions) for a [Firewall](#firewalls).
          */
         get: {
             parameters: {
@@ -3981,7 +4205,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description The `action` key contains the Firewall Action */
+                /** @description The `action` key contains the [Firewall](#firewalls) [Action](#actions). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -4150,7 +4374,7 @@ export interface paths {
                                  *      */
                                 home_location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -4158,7 +4382,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -4166,7 +4390,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -4178,23 +4402,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -4480,7 +4704,7 @@ export interface paths {
                                  *      */
                                 home_location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -4488,7 +4712,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -4496,7 +4720,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -4508,23 +4732,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -4930,7 +5154,7 @@ export interface paths {
                                  *      */
                                 home_location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -4938,7 +5162,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -4946,7 +5170,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -4958,23 +5182,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -5131,7 +5355,7 @@ export interface paths {
                                  *      */
                                 home_location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -5139,7 +5363,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -5147,7 +5371,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -5159,23 +5383,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -7594,66 +7818,108 @@ export interface paths {
                                  * @example lb11
                                  */
                                 name: string;
-                                /** @description Prices in different network zones */
+                                /** @description Price per [Location](#locations). */
                                 prices: {
                                     /**
                                      * Format: int64
-                                     * @description Free traffic per month in bytes.
+                                     * @description Free traffic per month in bytes in this [Location](#locations).
                                      * @example 654321
                                      */
                                     included_traffic: number;
                                     /**
-                                     * @description Name of the Location the price is for.
+                                     * @description Name of the [Location](#locations) the price is for.
                                      * @example fsn1
                                      */
                                     location: string;
-                                    /** @description Hourly costs for a Resource in this Location. */
+                                    /** @description Hourly price in this [Location](#locations). */
                                     price_hourly: {
                                         /**
                                          * Format: decimal
                                          * @description Price with VAT added.
-                                         * @example 1.1900000000000000
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
                                          * @description Price without VAT.
-                                         * @example 1.0000000000
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description Monthly costs for a Resource in this Location. */
+                                    /** @description Monthly price in this [Location](#locations). */
                                     price_monthly: {
                                         /**
                                          * Format: decimal
                                          * @description Price with VAT added.
-                                         * @example 1.1900000000000000
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
                                          * @description Price without VAT.
-                                         * @example 1.0000000000
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description The cost of additional traffic per TB. */
+                                    /** @description Additional traffic price per TB in this [Location](#locations). */
                                     price_per_tb_traffic: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
                                 }[];
                             }[];
+                            /** ListMeta */
+                            meta: {
+                                /** @description See "[Pagination](#pagination)" for more information. */
+                                pagination: {
+                                    /**
+                                     * Format: int64
+                                     * @description Page number of the last page available. Can be null if the current page is the last one.
+                                     * @example 4
+                                     */
+                                    last_page: number | null;
+                                    /**
+                                     * Format: int64
+                                     * @description Page number of the next page. Can be null if the current page is the last one.
+                                     * @example 4
+                                     */
+                                    next_page: number | null;
+                                    /**
+                                     * Format: int64
+                                     * @description Current page number.
+                                     * @example 3
+                                     */
+                                    page: number;
+                                    /**
+                                     * Format: int64
+                                     * @description Maximum number of entries returned per page.
+                                     * @example 25
+                                     */
+                                    per_page: number;
+                                    /**
+                                     * Format: int64
+                                     * @description Page number of the previous page. Can be null if the current page is the first one.
+                                     * @example 2
+                                     */
+                                    previous_page: number | null;
+                                    /**
+                                     * Format: int64
+                                     * @description Total number of entries that exist for this query. Can be null if unknown.
+                                     * @example 100
+                                     */
+                                    total_entries: number | null;
+                                };
+                            };
                         };
                     };
                 };
@@ -7743,61 +8009,61 @@ export interface paths {
                                  * @example lb11
                                  */
                                 name: string;
-                                /** @description Prices in different network zones */
+                                /** @description Price per [Location](#locations). */
                                 prices: {
                                     /**
                                      * Format: int64
-                                     * @description Free traffic per month in bytes.
+                                     * @description Free traffic per month in bytes in this [Location](#locations).
                                      * @example 654321
                                      */
                                     included_traffic: number;
                                     /**
-                                     * @description Name of the Location the price is for.
+                                     * @description Name of the [Location](#locations) the price is for.
                                      * @example fsn1
                                      */
                                     location: string;
-                                    /** @description Hourly costs for a Resource in this Location. */
+                                    /** @description Hourly price in this [Location](#locations). */
                                     price_hourly: {
                                         /**
                                          * Format: decimal
                                          * @description Price with VAT added.
-                                         * @example 1.1900000000000000
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
                                          * @description Price without VAT.
-                                         * @example 1.0000000000
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description Monthly costs for a Resource in this Location. */
+                                    /** @description Monthly price in this [Location](#locations). */
                                     price_monthly: {
                                         /**
                                          * Format: decimal
                                          * @description Price with VAT added.
-                                         * @example 1.1900000000000000
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
                                          * @description Price without VAT.
-                                         * @example 1.0000000000
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description The cost of additional traffic per TB. */
+                                    /** @description Additional traffic price per TB in this [Location](#locations). */
                                     price_per_tb_traffic: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
@@ -7950,61 +8216,61 @@ export interface paths {
                                      * @example lb11
                                      */
                                     name: string;
-                                    /** @description Prices in different network zones */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for.
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Resource in this Location. */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Resource in this Location. */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -8012,7 +8278,7 @@ export interface paths {
                                 };
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -8020,7 +8286,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -8028,7 +8294,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -8040,23 +8306,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -8415,6 +8681,7 @@ export interface paths {
          *     | `robot_unavailable`                     | Robot was not available. The caller may retry the operation after a short delay.                      |
          *     | `server_not_attached_to_network`        | The server you are trying to add as a target is not attached to the same network as the Load Balancer |
          *     | `source_port_already_used`              | The source port you are trying to add is already in use                                               |
+         *     | `missing_ipv4`                          | The server that you are trying to add as a public target does not have a public IPv4 address          |
          *     | `target_already_defined`                | The Load Balancer target you are trying to define is already defined                                  |
          *
          */
@@ -8875,61 +9142,61 @@ export interface paths {
                                      * @example lb11
                                      */
                                     name: string;
-                                    /** @description Prices in different network zones */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for.
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Resource in this Location. */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Resource in this Location. */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -8937,7 +9204,7 @@ export interface paths {
                                 };
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -8945,7 +9212,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -8953,7 +9220,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -8965,23 +9232,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -9674,61 +9941,61 @@ export interface paths {
                                      * @example lb11
                                      */
                                     name: string;
-                                    /** @description Prices in different network zones */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for.
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Resource in this Location. */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Resource in this Location. */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -9736,7 +10003,7 @@ export interface paths {
                                 };
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -9744,7 +10011,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -9752,7 +10019,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -9764,23 +10031,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -10223,61 +10490,61 @@ export interface paths {
                                      * @example lb11
                                      */
                                     name: string;
-                                    /** @description Prices in different network zones */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for.
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Resource in this Location. */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Resource in this Location. */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
                                              * @description Price with VAT added.
-                                             * @example 1.1900000000000000
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
                                              * @description Price without VAT.
-                                             * @example 1.0000000000
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -10285,7 +10552,7 @@ export interface paths {
                                 };
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -10293,7 +10560,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -10301,7 +10568,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -10313,23 +10580,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -11085,6 +11352,7 @@ export interface paths {
          *     | `load_balancer_not_attached_to_network` | The Load Balancer is not attached to a network                                                        |
          *     | `robot_unavailable`                     | Robot was not available. The caller may retry the operation after a short delay.                      |
          *     | `server_not_attached_to_network`        | The server you are trying to add as a target is not attached to the same network as the Load Balancer |
+         *     | `missing_ipv4`                          | The server that you are trying to add as a public target does not have a public IPv4 address          |
          *     | `target_already_defined`                | The Load Balancer target you are trying to define is already defined                                  |
          *
          */
@@ -12887,7 +13155,10 @@ export interface paths {
         };
         /**
          * Get all Locations
-         * @description Returns all Locations.
+         * @description Returns all [Locations](#locations).
+         *
+         *     Use the provided URI parameters to modify the result.
+         *
          */
         get: {
             parameters: {
@@ -12911,17 +13182,17 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description Contains the queried Locations. */
+                /** @description Response with the [Locations](#locations). */
                 200: {
                     headers: {
                         [name: string]: unknown;
                     };
                     content: {
                         "application/json": {
-                            /** @description List of Locations. */
+                            /** @description List of [Locations](#locations). */
                             locations: {
                                 /**
-                                 * @description Name of the closest city to the Location.
+                                 * @description Name of the closest city to the [Location](#locations).
                                  *
                                  *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                  *
@@ -12929,7 +13200,7 @@ export interface paths {
                                  */
                                 city: string;
                                 /**
-                                 * @description Country the Location resides in.
+                                 * @description Country the [Location](#locations) resides in.
                                  *
                                  *     ISO 3166-1 alpha-2 code of the country.
                                  *
@@ -12937,7 +13208,7 @@ export interface paths {
                                  */
                                 country: string;
                                 /**
-                                 * @description Humand readable description of the Location.
+                                 * @description Humand readable description of the [Location](#locations).
                                  * @example Falkenstein DC Park 1
                                  */
                                 description: string;
@@ -12949,23 +13220,23 @@ export interface paths {
                                 id: number;
                                 /**
                                  * Format: double
-                                 * @description Latitude of the city closest to the Location.
+                                 * @description Latitude of the city closest to the [Location](#locations).
                                  * @example 50.47612
                                  */
                                 latitude: number;
                                 /**
                                  * Format: double
-                                 * @description Longitude of the city closest to the Location.
+                                 * @description Longitude of the city closest to the [Location](#locations).
                                  * @example 12.370071
                                  */
                                 longitude: number;
                                 /**
-                                 * @description Unique identifier of the Location.
+                                 * @description Unique identifier of the [Location](#locations).
                                  * @example fsn1
                                  */
                                 name: string;
                                 /**
-                                 * @description Name of the Network Zone this Location resides in.
+                                 * @description Name of the Network Zone this [Location](#locations) resides in.
                                  * @example eu-central
                                  */
                                 network_zone: string;
@@ -13034,7 +13305,7 @@ export interface paths {
         };
         /**
          * Get a Location
-         * @description Returns a single Location.
+         * @description Returns a [Location](#locations).
          */
         get: {
             parameters: {
@@ -13048,7 +13319,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description Contains the queried Location. */
+                /** @description Response with the [Location](#locations). */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -13057,7 +13328,7 @@ export interface paths {
                         "application/json": {
                             location: {
                                 /**
-                                 * @description Name of the closest city to the Location.
+                                 * @description Name of the closest city to the [Location](#locations).
                                  *
                                  *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                  *
@@ -13065,7 +13336,7 @@ export interface paths {
                                  */
                                 city: string;
                                 /**
-                                 * @description Country the Location resides in.
+                                 * @description Country the [Location](#locations) resides in.
                                  *
                                  *     ISO 3166-1 alpha-2 code of the country.
                                  *
@@ -13073,7 +13344,7 @@ export interface paths {
                                  */
                                 country: string;
                                 /**
-                                 * @description Humand readable description of the Location.
+                                 * @description Humand readable description of the [Location](#locations).
                                  * @example Falkenstein DC Park 1
                                  */
                                 description: string;
@@ -13085,23 +13356,23 @@ export interface paths {
                                 id: number;
                                 /**
                                  * Format: double
-                                 * @description Latitude of the city closest to the Location.
+                                 * @description Latitude of the city closest to the [Location](#locations).
                                  * @example 50.47612
                                  */
                                 latitude: number;
                                 /**
                                  * Format: double
-                                 * @description Longitude of the city closest to the Location.
+                                 * @description Longitude of the city closest to the [Location](#locations).
                                  * @example 12.370071
                                  */
                                 longitude: number;
                                 /**
-                                 * @description Unique identifier of the Location.
+                                 * @description Unique identifier of the [Location](#locations).
                                  * @example fsn1
                                  */
                                 name: string;
                                 /**
-                                 * @description Name of the Network Zone this Location resides in.
+                                 * @description Name of the Network Zone this [Location](#locations) resides in.
                                  * @example eu-central
                                  */
                                 network_zone: string;
@@ -15922,273 +16193,283 @@ export interface paths {
                         "application/json": {
                             pricing: {
                                 /**
-                                 * @description Currency the returned prices are expressed in, coded according to ISO 4217
+                                 * @description Currency the returned prices are expressed in, coded according to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
                                  * @example EUR
                                  */
                                 currency: string;
-                                /** @description The cost of one Floating IP per month */
+                                /**
+                                 * @deprecated
+                                 * @description Price of [Floating IPs](#floating-ips).
+                                 *
+                                 *     **Deprecated**: This field is deprecated, please refer to the `floating_ips` field instead.
+                                 *
+                                 *     See the [Changelog](https://docs.hetzner.cloud/changelog#2024-08-29-field-floating_ip-in-pricing-response-is-now-deprecated) for more details.
+                                 *
+                                 */
                                 floating_ip: {
+                                    /** @description Price of one [Floating IP](#floating-ips) per month. */
                                     price_monthly: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
                                 };
-                                /** @description Costs of Floating IPs types per Location and type */
+                                /** @description Price of [Floating IPs](#floating-ips) per type and per [Location](#locations). */
                                 floating_ips: {
-                                    /** @description Floating IP type costs per Location */
+                                    /** @description Price of the [Floating IP](#floating-ips) type per [Location](#locations). */
                                     prices: {
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Monthly costs for a Floating IP type in this Location */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
                                     }[];
                                     /**
-                                     * @description The type of the Floating IP
+                                     * @description Type of [Floating IP](#floating-ips) the price is for.
                                      * @example ipv4
                                      * @enum {string}
                                      */
                                     type: "ipv4" | "ipv6";
                                 }[];
-                                /** @description The cost of Image per GB/month */
+                                /** @description Price of [Images](#images). */
                                 image: {
+                                    /** @description Price of [Images](#images) per GB/month. */
                                     price_per_gb_month: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
                                 };
-                                /** @description Costs of Load Balancer types per Location and type */
+                                /** @description Price of Load Balancer per [type](#load-balancer-types) and per [Location](#locations). */
                                 load_balancer_types: {
                                     /**
                                      * Format: int64
-                                     * @description ID of the Load Balancer type the price is for
+                                     * @description ID of the [Load Balancer Types](#load-balancer-types) the price is for.
                                      * @example 1
                                      */
                                     id: number;
                                     /**
-                                     * @description Name of the Load Balancer type the price is for
+                                     * @description Name of the [Load Balancer Types](#load-balancer-types) the price is for.
                                      * @example lb11
                                      */
                                     name: string;
-                                    /** @description Load Balancer type costs per Location */
+                                    /** @description Price of the [Load Balancer Types](#load-balancer-types) per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Load Balancer type in this network zone */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Load Balancer type in this network zone */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
                                     }[];
                                 }[];
-                                /** @description Costs of Primary IPs types per Location */
+                                /** @description Price of [Primary IPs](#primary-ips) per type and per [Location](#locations). */
                                 primary_ips: {
-                                    /** @description Primary IP type costs per Location */
+                                    /** @description Price of the [Primary IP](#primary-ips) type per [Location](#locations). */
                                     prices: {
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Primary IP type in this Location */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Primary IP type in this Location */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
                                     }[];
                                     /**
-                                     * @description The type of the Primary IP
+                                     * @description Type of [Primary IP](#primary-ips) the price is for.
                                      * @example ipv4
                                      * @enum {string}
                                      */
                                     type: "ipv4" | "ipv6";
                                 }[];
-                                /** @description Will increase base Server costs by specific percentage */
+                                /** @description Price of [Server](#servers) backups. */
                                 server_backup: {
                                     /**
                                      * Format: decimal
-                                     * @description Percentage by how much the base price will increase
-                                     * @example 20.0000000000
+                                     * @description Price increase of the [Server](#servers) base price in percentage.
+                                     * @example 20.00
                                      */
                                     percentage: string;
                                 };
-                                /** @description Costs of Server types per Location and type */
+                                /** @description Price of Server per [type](#server-types) and per [Location](#locations). */
                                 server_types: {
                                     /**
                                      * Format: int64
-                                     * @description ID of the Server type the price is for
-                                     * @example 4
+                                     * @description ID of the [Server Types](#server-types) the price is for.
+                                     * @example 104
                                      */
                                     id: number;
                                     /**
-                                     * @description Name of the Server type the price is for
-                                     * @example cx11
+                                     * @description Name of the [Server Types](#server-types) the price is for.
+                                     * @example cx22
                                      */
                                     name: string;
-                                    /** @description Server type costs per Location */
+                                    /** @description Price of the [Server Types](#server-types) per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Server type in this Location */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Server type in this Location */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -16197,6 +16478,7 @@ export interface paths {
                                 /**
                                  * @deprecated
                                  * @description **Deprecated**: This field is deprecated and set to `null` since 5 August 2024.
+                                 *
                                  *     Please refer to the `price_per_tb_traffic` fields in `server_types` and `load_balancer_types` instead.
                                  *
                                  *     Learn more about this change in [the Changelog](https://docs.hetzner.cloud/changelog#2024-07-25-cloud-api-returns-traffic-information-in-different-format).
@@ -16206,23 +16488,24 @@ export interface paths {
                                 traffic: Record<string, never>;
                                 /**
                                  * Format: decimal
-                                 * @description The VAT rate used for calculating prices with VAT
-                                 * @example 19.000000
+                                 * @description VAT rate used for calculating prices with VAT.
+                                 * @example 19.00
                                  */
                                 vat_rate: string;
-                                /** @description The cost of Volume per GB/month */
+                                /** @description Price of [Volumes](#volumes). */
                                 volume: {
+                                    /** @description Price of [Volumes](#volumes) per GB/month. */
                                     price_per_gb_month: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
@@ -16379,7 +16662,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -16387,7 +16670,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -16395,7 +16678,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -16407,23 +16690,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -16733,7 +17016,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -16741,7 +17024,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -16749,7 +17032,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -16761,23 +17044,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -17243,7 +17526,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -17251,7 +17534,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -17259,7 +17542,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -17271,23 +17554,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -17508,7 +17791,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -17516,7 +17799,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -17524,7 +17807,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -17536,23 +17819,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -18234,6 +18517,48 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
+                            /** ListMeta */
+                            meta: {
+                                /** @description See "[Pagination](#pagination)" for more information. */
+                                pagination: {
+                                    /**
+                                     * Format: int64
+                                     * @description Page number of the last page available. Can be null if the current page is the last one.
+                                     * @example 4
+                                     */
+                                    last_page: number | null;
+                                    /**
+                                     * Format: int64
+                                     * @description Page number of the next page. Can be null if the current page is the last one.
+                                     * @example 4
+                                     */
+                                    next_page: number | null;
+                                    /**
+                                     * Format: int64
+                                     * @description Current page number.
+                                     * @example 3
+                                     */
+                                    page: number;
+                                    /**
+                                     * Format: int64
+                                     * @description Maximum number of entries returned per page.
+                                     * @example 25
+                                     */
+                                    per_page: number;
+                                    /**
+                                     * Format: int64
+                                     * @description Page number of the previous page. Can be null if the current page is the first one.
+                                     * @example 2
+                                     */
+                                    previous_page: number | null;
+                                    /**
+                                     * Format: int64
+                                     * @description Total number of entries that exist for this query. Can be null if unknown.
+                                     * @example 100
+                                     */
+                                    total_entries: number | null;
+                                };
+                            };
                             server_types: {
                                 /**
                                  * @description Type of cpu architecture
@@ -18321,61 +18646,61 @@ export interface paths {
                                  * @example cx11
                                  */
                                 name: string;
-                                /** @description Prices in different Locations */
+                                /** @description Price per [Location](#locations). */
                                 prices: {
                                     /**
                                      * Format: int64
-                                     * @description Free traffic per month in bytes.
+                                     * @description Free traffic per month in bytes in this [Location](#locations).
                                      * @example 654321
                                      */
                                     included_traffic: number;
                                     /**
-                                     * @description Name of the Location the price is for
+                                     * @description Name of the [Location](#locations) the price is for.
                                      * @example fsn1
                                      */
                                     location: string;
-                                    /** @description Hourly costs for a Server type in this Location */
+                                    /** @description Hourly price in this [Location](#locations). */
                                     price_hourly: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description Monthly costs for a Server type in this Location */
+                                    /** @description Monthly price in this [Location](#locations). */
                                     price_monthly: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description The cost of additional traffic per TB. */
+                                    /** @description Additional traffic price per TB in this [Location](#locations). */
                                     price_per_tb_traffic: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
@@ -18516,61 +18841,61 @@ export interface paths {
                                  * @example cx11
                                  */
                                 name: string;
-                                /** @description Prices in different Locations */
+                                /** @description Price per [Location](#locations). */
                                 prices: {
                                     /**
                                      * Format: int64
-                                     * @description Free traffic per month in bytes.
+                                     * @description Free traffic per month in bytes in this [Location](#locations).
                                      * @example 654321
                                      */
                                     included_traffic: number;
                                     /**
-                                     * @description Name of the Location the price is for
+                                     * @description Name of the [Location](#locations) the price is for.
                                      * @example fsn1
                                      */
                                     location: string;
-                                    /** @description Hourly costs for a Server type in this Location */
+                                    /** @description Hourly price in this [Location](#locations). */
                                     price_hourly: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description Monthly costs for a Server type in this Location */
+                                    /** @description Monthly price in this [Location](#locations). */
                                     price_monthly: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
-                                    /** @description The cost of additional traffic per TB. */
+                                    /** @description Additional traffic price per TB in this [Location](#locations). */
                                     price_per_tb_traffic: {
                                         /**
                                          * Format: decimal
-                                         * @description Price with VAT added
-                                         * @example 1.1900000000000000
+                                         * @description Price with VAT added.
+                                         * @example 1.1900
                                          */
                                         gross: string;
                                         /**
                                          * Format: decimal
-                                         * @description Price without VAT
-                                         * @example 1.0000000000
+                                         * @description Price without VAT.
+                                         * @example 1.0000
                                          */
                                         net: string;
                                     };
@@ -18715,7 +19040,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -18723,7 +19048,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -18731,7 +19056,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -18743,23 +19068,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -19301,61 +19626,61 @@ export interface paths {
                                      * @example cx11
                                      */
                                     name: string;
-                                    /** @description Prices in different Locations */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Server type in this Location */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Server type in this Location */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -19703,7 +20028,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -19711,7 +20036,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -19719,7 +20044,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -19731,23 +20056,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -20289,61 +20614,61 @@ export interface paths {
                                      * @example cx11
                                      */
                                     name: string;
-                                    /** @description Prices in different Locations */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Server type in this Location */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Server type in this Location */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -20699,7 +21024,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -20707,7 +21032,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -20715,7 +21040,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -20727,23 +21052,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -21285,61 +21610,61 @@ export interface paths {
                                      * @example cx11
                                      */
                                     name: string;
-                                    /** @description Prices in different Locations */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Server type in this Location */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Server type in this Location */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -21442,7 +21767,7 @@ export interface paths {
                                      *      */
                                     location: {
                                         /**
-                                         * @description Name of the closest city to the Location.
+                                         * @description Name of the closest city to the [Location](#locations).
                                          *
                                          *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                          *
@@ -21450,7 +21775,7 @@ export interface paths {
                                          */
                                         city: string;
                                         /**
-                                         * @description Country the Location resides in.
+                                         * @description Country the [Location](#locations) resides in.
                                          *
                                          *     ISO 3166-1 alpha-2 code of the country.
                                          *
@@ -21458,7 +21783,7 @@ export interface paths {
                                          */
                                         country: string;
                                         /**
-                                         * @description Humand readable description of the Location.
+                                         * @description Humand readable description of the [Location](#locations).
                                          * @example Falkenstein DC Park 1
                                          */
                                         description: string;
@@ -21470,23 +21795,23 @@ export interface paths {
                                         id: number;
                                         /**
                                          * Format: double
-                                         * @description Latitude of the city closest to the Location.
+                                         * @description Latitude of the city closest to the [Location](#locations).
                                          * @example 50.47612
                                          */
                                         latitude: number;
                                         /**
                                          * Format: double
-                                         * @description Longitude of the city closest to the Location.
+                                         * @description Longitude of the city closest to the [Location](#locations).
                                          * @example 12.370071
                                          */
                                         longitude: number;
                                         /**
-                                         * @description Unique identifier of the Location.
+                                         * @description Unique identifier of the [Location](#locations).
                                          * @example fsn1
                                          */
                                         name: string;
                                         /**
-                                         * @description Name of the Network Zone this Location resides in.
+                                         * @description Name of the Network Zone this [Location](#locations) resides in.
                                          * @example eu-central
                                          */
                                         network_zone: string;
@@ -22028,61 +22353,61 @@ export interface paths {
                                      * @example cx11
                                      */
                                     name: string;
-                                    /** @description Prices in different Locations */
+                                    /** @description Price per [Location](#locations). */
                                     prices: {
                                         /**
                                          * Format: int64
-                                         * @description Free traffic per month in bytes.
+                                         * @description Free traffic per month in bytes in this [Location](#locations).
                                          * @example 654321
                                          */
                                         included_traffic: number;
                                         /**
-                                         * @description Name of the Location the price is for
+                                         * @description Name of the [Location](#locations) the price is for.
                                          * @example fsn1
                                          */
                                         location: string;
-                                        /** @description Hourly costs for a Server type in this Location */
+                                        /** @description Hourly price in this [Location](#locations). */
                                         price_hourly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description Monthly costs for a Server type in this Location */
+                                        /** @description Monthly price in this [Location](#locations). */
                                         price_monthly: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
-                                        /** @description The cost of additional traffic per TB. */
+                                        /** @description Additional traffic price per TB in this [Location](#locations). */
                                         price_per_tb_traffic: {
                                             /**
                                              * Format: decimal
-                                             * @description Price with VAT added
-                                             * @example 1.1900000000000000
+                                             * @description Price with VAT added.
+                                             * @example 1.1900
                                              */
                                             gross: string;
                                             /**
                                              * Format: decimal
-                                             * @description Price without VAT
-                                             * @example 1.0000000000
+                                             * @description Price without VAT.
+                                             * @example 1.0000
                                              */
                                             net: string;
                                         };
@@ -25971,7 +26296,7 @@ export interface paths {
                                 /** @description Location of the Volume. Volume can only be attached to Servers in the same Location. */
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -25979,7 +26304,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -25987,7 +26312,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -25999,23 +26324,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -26312,7 +26637,7 @@ export interface paths {
                                 /** @description Location of the Volume. Volume can only be attached to Servers in the same Location. */
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -26320,7 +26645,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -26328,7 +26653,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -26340,23 +26665,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -26736,7 +27061,7 @@ export interface paths {
                                 /** @description Location of the Volume. Volume can only be attached to Servers in the same Location. */
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -26744,7 +27069,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -26752,7 +27077,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -26764,23 +27089,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -26908,7 +27233,7 @@ export interface paths {
                                 /** @description Location of the Volume. Volume can only be attached to Servers in the same Location. */
                                 location: {
                                     /**
-                                     * @description Name of the closest city to the Location.
+                                     * @description Name of the closest city to the [Location](#locations).
                                      *
                                      *     City name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.
                                      *
@@ -26916,7 +27241,7 @@ export interface paths {
                                      */
                                     city: string;
                                     /**
-                                     * @description Country the Location resides in.
+                                     * @description Country the [Location](#locations) resides in.
                                      *
                                      *     ISO 3166-1 alpha-2 code of the country.
                                      *
@@ -26924,7 +27249,7 @@ export interface paths {
                                      */
                                     country: string;
                                     /**
-                                     * @description Humand readable description of the Location.
+                                     * @description Humand readable description of the [Location](#locations).
                                      * @example Falkenstein DC Park 1
                                      */
                                     description: string;
@@ -26936,23 +27261,23 @@ export interface paths {
                                     id: number;
                                     /**
                                      * Format: double
-                                     * @description Latitude of the city closest to the Location.
+                                     * @description Latitude of the city closest to the [Location](#locations).
                                      * @example 50.47612
                                      */
                                     latitude: number;
                                     /**
                                      * Format: double
-                                     * @description Longitude of the city closest to the Location.
+                                     * @description Longitude of the city closest to the [Location](#locations).
                                      * @example 12.370071
                                      */
                                     longitude: number;
                                     /**
-                                     * @description Unique identifier of the Location.
+                                     * @description Unique identifier of the [Location](#locations).
                                      * @example fsn1
                                      */
                                     name: string;
                                     /**
-                                     * @description Name of the Network Zone this Location resides in.
+                                     * @description Name of the Network Zone this [Location](#locations) resides in.
                                      * @example eu-central
                                      */
                                     network_zone: string;
@@ -28268,64 +28593,6 @@ export interface components {
          * @example 42
          */
         LoadBalancerTypeID: number;
-        LoadBalancerTypePrices: {
-            /**
-             * Format: int64
-             * @description Free traffic per month in bytes.
-             * @example 654321
-             */
-            included_traffic: number;
-            /**
-             * @description Name of the Location the price is for.
-             * @example fsn1
-             */
-            location: string;
-            /** @description Hourly costs for a Resource in this Location. */
-            price_hourly: {
-                /**
-                 * Format: decimal
-                 * @description Price with VAT added.
-                 * @example 1.1900000000000000
-                 */
-                gross: string;
-                /**
-                 * Format: decimal
-                 * @description Price without VAT.
-                 * @example 1.0000000000
-                 */
-                net: string;
-            };
-            /** @description Monthly costs for a Resource in this Location. */
-            price_monthly: {
-                /**
-                 * Format: decimal
-                 * @description Price with VAT added.
-                 * @example 1.1900000000000000
-                 */
-                gross: string;
-                /**
-                 * Format: decimal
-                 * @description Price without VAT.
-                 * @example 1.0000000000
-                 */
-                net: string;
-            };
-            /** @description The cost of additional traffic per TB. */
-            price_per_tb_traffic: {
-                /**
-                 * Format: decimal
-                 * @description Price with VAT added
-                 * @example 1.1900000000000000
-                 */
-                gross: string;
-                /**
-                 * Format: decimal
-                 * @description Price without VAT
-                 * @example 1.0000000000
-                 */
-                net: string;
-            };
-        };
         /**
          * Format: int64
          * @description ID of the Location.
@@ -28388,39 +28655,111 @@ export interface components {
          * @example 42
          */
         PlacementGroupID: number;
-        Prices: {
+        Price: {
             /**
-             * @description Name of the Location the price is for.
+             * Format: decimal
+             * @description Price with VAT added.
+             * @example 1.1900
+             */
+            gross: string;
+            /**
+             * Format: decimal
+             * @description Price without VAT.
+             * @example 1.0000
+             */
+            net: string;
+        };
+        PriceRatePerLocation: {
+            /**
+             * @description Name of the [Location](#locations) the price is for.
              * @example fsn1
              */
             location: string;
-            /** @description Hourly costs for a Resource in this Location. */
+            /** @description Hourly price in this [Location](#locations). */
             price_hourly: {
                 /**
                  * Format: decimal
                  * @description Price with VAT added.
-                 * @example 1.1900000000000000
+                 * @example 1.1900
                  */
                 gross: string;
                 /**
                  * Format: decimal
                  * @description Price without VAT.
-                 * @example 1.0000000000
+                 * @example 1.0000
                  */
                 net: string;
             };
-            /** @description Monthly costs for a Resource in this Location. */
+            /** @description Monthly price in this [Location](#locations). */
             price_monthly: {
                 /**
                  * Format: decimal
                  * @description Price with VAT added.
-                 * @example 1.1900000000000000
+                 * @example 1.1900
                  */
                 gross: string;
                 /**
                  * Format: decimal
                  * @description Price without VAT.
-                 * @example 1.0000000000
+                 * @example 1.0000
+                 */
+                net: string;
+            };
+        };
+        PriceRatePerLocationWithTraffic: {
+            /**
+             * Format: int64
+             * @description Free traffic per month in bytes in this [Location](#locations).
+             * @example 654321
+             */
+            included_traffic: number;
+            /**
+             * @description Name of the [Location](#locations) the price is for.
+             * @example fsn1
+             */
+            location: string;
+            /** @description Hourly price in this [Location](#locations). */
+            price_hourly: {
+                /**
+                 * Format: decimal
+                 * @description Price with VAT added.
+                 * @example 1.1900
+                 */
+                gross: string;
+                /**
+                 * Format: decimal
+                 * @description Price without VAT.
+                 * @example 1.0000
+                 */
+                net: string;
+            };
+            /** @description Monthly price in this [Location](#locations). */
+            price_monthly: {
+                /**
+                 * Format: decimal
+                 * @description Price with VAT added.
+                 * @example 1.1900
+                 */
+                gross: string;
+                /**
+                 * Format: decimal
+                 * @description Price without VAT.
+                 * @example 1.0000
+                 */
+                net: string;
+            };
+            /** @description Additional traffic price per TB in this [Location](#locations). */
+            price_per_tb_traffic: {
+                /**
+                 * Format: decimal
+                 * @description Price with VAT added.
+                 * @example 1.1900
+                 */
+                gross: string;
+                /**
+                 * Format: decimal
+                 * @description Price without VAT.
+                 * @example 1.0000
                  */
                 net: string;
             };
@@ -28548,11 +28887,6 @@ export interface components {
         QueryPaginationPage: number;
         /** @description Maximum number of entries returned per page. For more information, see "[Pagination](#pagination)". */
         QueryPaginationPerPage: number;
-        /** @description Filter for project IDs.Can be used multiple times.
-         *
-         *     The response will only contain items with the specified projects.
-         *      */
-        QueryProjectIDList: number[];
         /** @description Sort resources by field and direction. Can be used multiple times. For more
          *     information, see "[Sorting](#sorting)".
          *      */

@@ -1,5 +1,5 @@
 import "zx/globals";
-import * as schema from "./hetzner-client/schema.d.ts";
+import type * as schema from "./hetzner-client/schema.d.ts";
 import createClient from "openapi-fetch";
 
 const hetznerApiKey = Deno.env.get("HETZNER_API_KEY");
