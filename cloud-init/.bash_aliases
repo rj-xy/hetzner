@@ -1,3 +1,11 @@
+#! /bin/bash
+#
+# ~/.bashrc.aliases
+#
+
+if [ -d "$HOME/.local/bin" ] ; then PATH="$HOME/.local/bin:$PATH"; fi
+if [ -d "$HOME/bin" ] ; then PATH="$HOME/bin:$PATH"; fi
+
 # stop all containers:
 alias docker-kill='docker kill $(docker ps -q)'
 # remove all containers

@@ -1,0 +1,41 @@
+version: "3.2"
+
+name: jacq
+
+services:
+  port:
+    container_name: port
+    image: "portainer/portainer-ce:latest"
+    restart: unless-stopped
+    ports:
+      - "9443:9443"
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  portainer_data:
+#
+# Check if portainer is running
+# nc -zv localhost 9443
+
+# Reset password
+# Reset admin password: https://docs.portainer.io/advanced/reset-admin
+# docker compose -f /jacq/compose.yaml stop
+# docker pull portainer/helper-reset-password
+# docker run --rm -v jacq_portainer_data:/data portainer/helper-reset-password
+# docker compose -f /jacq/compose.yaml up -d
+
+# docker volume rm jacq_portainer_data
+# docker compose -f /jacq/compose.yaml down
+
+# ENC_PASS=$(docker run --rm httpd:2.4-alpine htpasswd -nbB admin 'ASD@#$#$%sdgEDFRG345t')
+# # bycrypt password and remove the first part (`admin:`)
+# ENC_PASS=$(echo $ENC_PASS | cut -d ":" -f 2)
+# # escape `$` with `$$`
+# ENC_PASS=$(echo $ENC_PASS | sed 's/\$/\$\$/g')
+# echo $ENC_PASS
+
+# Init Admin password
+# curl -L -k -X POST 'https://localhost:9443/api/users/admin/init' --header 'Content-Type: application/json' --data-raw '{"username":"admin","password":"xxxxxxxx"}'
+

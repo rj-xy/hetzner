@@ -34,20 +34,30 @@ users:
 #   - path: /home/rj/compose.yaml
 #     source: compose.yaml
 
-# # https://cloudinit.readthedocs.io/en/0.7.9/topics/examples.html#add-apt-repositories
-# apt:
-#   primary:
-#     - arches: [default]
+# https://launchpad.net/ubuntu/+archivemirrors
+# sudo sed -i 's/http:\/\/us.archive.ubuntu.com/http:\/\/sg.archive.ubuntu.com/' /etc/apt/sources.list
+# Better docs: https://github.com/canonical/curtin/blob/master/examples/apt-source.yaml
+# -> https://curtin.readthedocs.io/en/latest/topics/apt_source.html#
+# https://cloudinit.readthedocs.io/en/latest/reference/yaml_examples/apt.html
+# Ubuntu sources directory: /etc/apt/sources.list or /etc/apt/sources.list.d/
+apt:
+  preserve_sources_list: false
+  primary:
+    - arches: [default]
+      uri: http://sg.archive.ubuntu.com/ubuntu/
 #       search:
-#         - http://archive.ubuntu.com
-#         - https://mirror.aarnet.edu.au/ubuntu/
-#         - http://au.archive.ubuntu.com/ubuntu
-#         - http://security.ubuntu.com/ubuntu/
+#         # Singapore  
+#         - http://sg.archive.ubuntu.com/ubuntu/
+#         - http://mirror.sg.gs/ubuntu/
+#         # Australia
+#         # - https://mirror.aarnet.edu.au/ubuntu/
+#         # - http://au.archive.ubuntu.com/ubuntu
 
 packages:
   - curl
-  - ufw
+  - mpack
   - sshguard
+  - ufw
 package_update: true
 package_upgrade: true
 
@@ -86,7 +96,12 @@ runcmd:
   - usermod -aG docker rj
   - systemctl enable docker
   - systemctl enable containerd
-  - curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+  - mkdir -p /home/rj/.local/bin
+  - sudo runuser -l rj -c "curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash"
   - rm -f /get-docker.sh
+
+  # Extract files in this directory from the MIME message
+  - sudo munpack -f /var/lib/cloud/instance/user-data.txt -C /tmp
+  - mv /tmp/.bash_aliases /home/rj/.bash_aliases
 
   - reboot
